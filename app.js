@@ -24,20 +24,27 @@ var seattle = {
   minCust: 23,
   maxCust: 65,
   avgSales: 6.3,
-  customers: 8, //randomly generated through method 'random.
+  customers: [], //randomly generated through method 'random.       //**** change
 
-  salesPerHour: 10, //generated through multplying avgSales by cusomers
-  hourlySaleArr: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], //array for sales per each hour
+  salesPerHour: [], //generated through multplying avgSales by cusomers
+  // hourlySaleArr: [], //array for sales per each hour
   random: function (minCust, maxCust) {
-    this.customers = generateRandomNumber(minCust, maxCust);
+    for (var i = 0; i < timeArr.length; i++) {
+      newNum = generateRandomNumber(minCust, maxCust);
+      this.customers.push(newNum);
+    }
   },
   sales: function (customers, avgSales) {
-    this.salesPerHour = salesEachHour(customers, avgSales);
+    for (var i = 0; i < customers.length; i++);
+    {
+      newNum = salesEachHour(customers, avgSales);
+      this.salesPerHour.push(newNum);
+    }
   },
   //maybe add method to view all sales per each hour in an array
-  SA: function (salesPerHour) {
-    this.hourlySaleArr = salesArrfunct(salesPerHour);
-  },
+  // SA: function (salesPerHour) {
+  //   this.hourlySaleArr = salesArrfunct(salesPerHour);
+  // },
   //DOM
   render: function () {
     var parentElement = document.getElementById("locations");
@@ -78,18 +85,19 @@ function generateRandomNumber(minValue, maxValue) {
   return R;
 }
 function salesEachHour(c, s) {
+  // for (var i = 0; i < timeArr.length; i++);
   var SpH = c * s;
 
   return SpH;
 }
-function salesArrfunct(SpH) {
-  x = salesEachHour();
-  for (var i = 0; i < timeArr.length; i++) {
-    salesArr = x[i];
+// function salesArrfunct(SpH) {
+//   x = salesEachHour();
+//   for (var i = 0; i < timeArr.length; i++) {
+//     salesArr = x[i];
 
-    return salesArr;
-  }
-}
+//     return salesArr;
+//   }
+// }
 
 //the rest of the locations are lacking a name key. and everything after the DOM
 
