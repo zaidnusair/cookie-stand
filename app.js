@@ -22,9 +22,78 @@ var timeArr = [
 function generateRandomNumber(minValue, maxValue) {
   var randomValue = Math.random();
   R = Math.floor(randomValue * (maxValue - minValue + 1)) + minValue;
+
   return R;
 }
 
+//constructors
+function Location(locationName, minCust, maxCust, avgSales) {
+  this.name = locationName;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgSales = avgSales;
+  this.customers = [];
+  this.salesPerHour = [];
+  this.totalCookies = 0;
+}
+Location.prototype.random = function () {
+  for (var i = 0; i < timeArr.length; i++) {
+    var newNum = generateRandomNumber(this.minCust, this.maxCust);
+    this.customers.push(newNum);
+  }
+};
+Location.prototype.sales = function () {
+  for (var i = 0; i < timeArr.length; i++) {
+    var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
+    this.salesPerHour.push(numOfCookies);
+
+    this.totalCookies = this.totalCookies + numOfCookies;
+  }
+};
+Location.prototype.render = function () {
+  var parentElement = document.getElementById("locations");
+
+  var article = document.createElement("article");
+  parentElement.appendChild(article);
+
+  var h2 = document.createElement("h2");
+  h2.innerHTML = this.name; //can replace .innerHTML with .textContent
+  article.appendChild(h2);
+
+  var p = document.createElement("p");
+  p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
+  article.appendChild(p);
+
+  var p2 = document.createElement("p");
+  p2.textContent = "total Sales= " + this.totalCookies;
+  article.appendChild(p2);
+
+  var ul = document.createElement("ul");
+  article.appendChild(ul);
+
+  for (var i = 0; i < timeArr.length; i++) {
+    var li = document.createElement("li");
+    ul.appendChild(li);
+    li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
+  }
+
+  console.log(parentElement);
+};
+
+var Seattle = new Location("Seattle", 23, 65, 6.3);
+
+Seattle.random(23, 65);
+Seattle.sales();
+Seattle.render();
+console.table(Seattle);
+console.log(Seattle);
+
+//adding properties to constructor                       //Location.prototype.customers=[]
+
+//calling                                               //seatlle.method() to call
+
+//constructors
+/*
 var seattle = {
   name: "Seatlle",
   minCust: 23,
@@ -356,3 +425,4 @@ Lima.sales();
 Lima.render();
 console.log(Lima);
 console.table(Lima);
+*/
