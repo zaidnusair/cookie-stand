@@ -81,12 +81,30 @@ Location.prototype.render = function () {
 };
 
 var Seattle = new Location("Seattle", 23, 65, 6.3);
+var Tokyo = new Location("Tokyo", 3, 24, 1.2);
+var Dubai = new Location("Dubai", 11, 38, 3.7);
+var Paris = new Location("Paris", 20, 38, 2.3);
+var Lima = new Location("Lima", 2, 16, 4.6);
 
 Seattle.random(23, 65);
 Seattle.sales();
 Seattle.render();
 console.table(Seattle);
-console.log(Seattle);
+
+Tokyo.random(3, 24);
+Tokyo.sales();
+Tokyo.render();
+console.table(Tokyo);
+
+Dubai.random(11, 38);
+Dubai.sales();
+Dubai.render();
+console.table(Dubai);
+
+Lima.random(2, 16);
+Lima.sales();
+Lima.render();
+console.table(Lima);
 
 //adding properties to constructor                       //Location.prototype.customers=[]
 
