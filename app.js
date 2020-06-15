@@ -294,11 +294,11 @@ console.table(Paris);
 //   maxCust: 16,
 //   avgSales: 4.6,
 
-var seattle = {
-  name: "Seatlle",
-  minCust: 23,
-  maxCust: 65,
-  avgSales: 6.3,
+var Lima = {
+  name: "Lima",
+  minCust: 2,
+  maxCust: 16,
+  avgSales: 4.6,
   customers: [],
   salesPerHour: [],
   totalCookies: 0,
@@ -351,8 +351,8 @@ var seattle = {
   },
 };
 
-seattle.random(23, 65);
-seattle.sales();
-seattle.render();
-console.log(seattle);
-console.table(seattle);
+Lima.random(2, 16);
+Lima.sales();
+Lima.render();
+console.log(Lima);
+console.table(Lima);
