@@ -2,6 +2,7 @@
 // //13 hrs per day [0-12]
 
 var R = 0; //random number generated
+var locationsArr = [];
 var timeArr = [
   "6am",
   "7am",
@@ -62,6 +63,7 @@ function Location(name, minCust, maxCust, avgSales) {
   this.customers = [];
   this.salesPerHour = [];
   this.totalCookies = 0;
+  locationsArr.push(this);
 }
 Location.prototype.random = function () {
   for (var i = 0; i < timeArr.length; i++) {
@@ -142,15 +144,20 @@ Location.prototype.render = function () {
 };
 
 var Seattle = new Location("Seattle", 23, 65, 6.3);
-// var Tokyo = new Location("Tokyo", 3, 24, 1.2);
-// var Dubai = new Location("Dubai", 11, 38, 3.7);
-// var Paris = new Location("Paris", 20, 38, 2.3);
-// var Lima = new Location("Lima", 2, 16, 4.6);
+var Tokyo = new Location("Tokyo", 3, 24, 1.2);
+var Dubai = new Location("Dubai", 11, 38, 3.7);
+var Paris = new Location("Paris", 20, 38, 2.3);
+var Lima = new Location("Lima", 2, 16, 4.6);
 
-Seattle.random(23, 65);
-Seattle.sales();
-Seattle.render();
-console.table(Seattle);
+for (var i = 0; i < locationsArr.length; i++) {
+  locationsArr[i].random();
+  locationsArr[i].sales();
+  locationsArr[i].render();
+}
+// Seattle.random(23, 65);
+// Seattle.sales();
+// Seattle.render();
+// console.table(Seattle);
 
 // Tokyo.random(3, 24);
 // Tokyo.sales();
