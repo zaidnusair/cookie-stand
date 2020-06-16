@@ -2,6 +2,7 @@
 // //13 hrs per day [0-12]
 
 var R = 0; //random number generated
+var locationsArr = [];
 var timeArr = [
   "6am",
   "7am",
@@ -22,337 +23,121 @@ var timeArr = [
 function generateRandomNumber(minValue, maxValue) {
   var randomValue = Math.random();
   R = Math.floor(randomValue * (maxValue - minValue + 1)) + minValue;
+
   return R;
 }
 
-var seattle = {
-  name: "Seatlle",
-  minCust: 23,
-  maxCust: 65,
-  avgSales: 6.3,
-  customers: [],
-  salesPerHour: [],
-  totalCookies: 0,
+function createTheTable() {
+  var parentElement = document.getElementById("locations");
+  var table = document.createElement("table");
+  table.setAttribute("id", "cookiesTable");
+  parentElement.appendChild(table);
+}
 
-  random: function (minCust, maxCust) {
-    for (var i = 0; i < timeArr.length; i++) {
-      var newNum = generateRandomNumber(minCust, maxCust);
-      this.customers.push(newNum);
-      // console.log(newNum);
+function createTableHeader() {
+  var headerTr = document.createElement("tr");
+  var emptyHeader = document.createElement("th");
+  headerTr.appendChild(emptyHeader);
+  for (var i = 0; i < timeArr.length; i++) {
+    var headerTh = document.createElement("th");
+
+    headerTh.textContent = timeArr[i];
+
+    headerTr.appendChild(headerTh);
+  }
+  var totalTh = document.createElement("th");
+  totalTh.textContent = "daily location total";
+  headerTr.appendChild(totalTh);
+  var table = document.getElementById("cookiesTable");
+  table.appendChild(headerTr);
+}
+
+function createTableFooter() {
+  console.log(locationsArr);
+  var table = document.getElementById("cookiesTable");
+  var footerTr = document.createElement("tr");
+  var footerTd = document.createElement("td");
+  footerTd.textContent = "Totals";
+  footerTr.appendChild(footerTd);
+  var finalTotal = 0;
+
+  for (var i = 0; i < timeArr.length; i++) {
+    var hourTotalTd = document.createElement("td");
+    var hourTotal = 0;
+    for (var j = 0; j < locationsArr.length; j++) {
+      var x = locationsArr[j];
+      console.log(Seattle.salesPerHour);
+      hourTotal += x.salesPerHour[i];
     }
-  },
-  sales: function () {
-    for (var i = 0; i < timeArr.length; i++) {
-      var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
-      this.salesPerHour.push(numOfCookies);
+    finalTotal += hourTotal;
 
-      this.totalCookies = this.totalCookies + numOfCookies;
-    }
-  },
+    hourTotalTd.textContent = hourTotal;
+    footerTr.appendChild(hourTotalTd);
+  }
+  var finalTotalTd = document.createElement("td");
 
-  //DOM
-  render: function () {
-    var parentElement = document.getElementById("locations");
+  finalTotalTd.textContent = finalTotal;
+  footerTr.appendChild(finalTotalTd);
+  table.appendChild(footerTr);
+}
 
-    var article = document.createElement("article");
-    parentElement.appendChild(article);
-
-    var h2 = document.createElement("h2");
-    h2.innerHTML = this.name; //can replace .innerHTML with .textContent
-    article.appendChild(h2);
-
-    var p = document.createElement("p");
-    p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
-    article.appendChild(p);
-
-    var p2 = document.createElement("p");
-    p2.textContent = "total Sales= " + this.totalCookies;
-    article.appendChild(p2);
-
-    var ul = document.createElement("ul");
-    article.appendChild(ul);
-
-    for (var i = 0; i < timeArr.length; i++) {
-      var li = document.createElement("li");
-      ul.appendChild(li);
-      li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
-    }
-
-    console.log(parentElement);
-  },
+//constructors
+function Location(name, minCust, maxCust, avgSales) {
+  this.name = name;
+  this.minCust = minCust;
+  this.maxCust = maxCust;
+  this.avgSales = avgSales;
+  this.customers = [];
+  this.salesPerHour = [];
+  this.totalCookies = 0;
+  locationsArr.push(this);
+}
+Location.prototype.random = function () {
+  for (var i = 0; i < timeArr.length; i++) {
+    var newNum = generateRandomNumber(this.minCust, this.maxCust);
+    this.customers.push(newNum);
+  }
 };
-
-seattle.random(23, 65);
-seattle.sales();
-seattle.render();
-console.log(seattle);
-console.table(seattle);
-
-// var Tokyo =
-//   minCust: 3,
-//   maxCust: 24,
-//   avgSales: 1.2,
-
-var Tokyo = {
-  name: "Tokyo",
-  minCust: 3,
-  maxCust: 24,
-  avgSales: 1.2,
-  customers: [],
-  salesPerHour: [],
-  totalCookies: 0,
-
-  random: function (minCust, maxCust) {
-    for (var i = 0; i < timeArr.length; i++) {
-      var newNum = generateRandomNumber(minCust, maxCust);
-      this.customers.push(newNum);
-      // console.log(newNum);
-    }
-  },
-  sales: function () {
-    for (var i = 0; i < timeArr.length; i++) {
-      var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
-      this.salesPerHour.push(numOfCookies);
-
-      this.totalCookies = this.totalCookies + numOfCookies;
-    }
-  },
-
-  //DOM
-  render: function () {
-    var parentElement = document.getElementById("locations");
-
-    var article = document.createElement("article");
-    parentElement.appendChild(article);
-
-    var h2 = document.createElement("h2");
-    h2.innerHTML = this.name; //can replace .innerHTML with .textContent
-    article.appendChild(h2);
-
-    var p = document.createElement("p");
-    p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
-    article.appendChild(p);
-
-    var p2 = document.createElement("p");
-    p2.textContent = "total Sales= " + this.totalCookies;
-    article.appendChild(p2);
-
-    var ul = document.createElement("ul");
-    article.appendChild(ul);
-
-    for (var i = 0; i < timeArr.length; i++) {
-      var li = document.createElement("li");
-      ul.appendChild(li);
-      li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
-    }
-
-    console.log(parentElement);
-  },
+Location.prototype.sales = function () {
+  for (var i = 0; i < timeArr.length; i++) {
+    var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
+    this.salesPerHour.push(numOfCookies);
+    this.totalCookies = this.totalCookies + numOfCookies; // or this.totalCookies +=  numOfCookies
+  }
 };
+Location.prototype.render = function () {
+  //adding location row
+  var table = document.getElementById("cookiesTable");
 
-Tokyo.random(3, 24);
-Tokyo.sales();
-Tokyo.render();
-console.log(Tokyo);
-console.table(Tokyo);
+  var tr = document.createElement("tr");
+  table.appendChild(tr);
+  var td = document.createElement("td");
+  td.textContent = this.name;
+  tr.appendChild(td);
 
-// var Dubai = {
-//   minCust: 11,
-//   maxCust: 38,
-//   avgSales: 3.7,
-var Dubai = {
-  name: "Dubai",
-  minCust: 11,
-  maxCust: 38,
-  avgSales: 3.7,
-  customers: [],
-  salesPerHour: [],
-  totalCookies: 0,
-
-  random: function (minCust, maxCust) {
-    for (var i = 0; i < timeArr.length; i++) {
-      var newNum = generateRandomNumber(minCust, maxCust);
-      this.customers.push(newNum);
-      // console.log(newNum);
-    }
-  },
-  sales: function () {
-    for (var i = 0; i < timeArr.length; i++) {
-      var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
-      this.salesPerHour.push(numOfCookies);
-
-      this.totalCookies = this.totalCookies + numOfCookies;
-    }
-  },
-
-  //DOM
-  render: function () {
-    var parentElement = document.getElementById("locations");
-
-    var article = document.createElement("article");
-    parentElement.appendChild(article);
-
-    var h2 = document.createElement("h2");
-    h2.innerHTML = this.name; //can replace .innerHTML with .textContent
-    article.appendChild(h2);
-
-    var p = document.createElement("p");
-    p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
-    article.appendChild(p);
-
-    var p2 = document.createElement("p");
-    p2.textContent = "total Sales= " + this.totalCookies;
-    article.appendChild(p2);
-
-    var ul = document.createElement("ul");
-    article.appendChild(ul);
-
-    for (var i = 0; i < timeArr.length; i++) {
-      var li = document.createElement("li");
-      ul.appendChild(li);
-      li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
-    }
-
-    console.log(parentElement);
-  },
+  for (var i = 0; i < this.salesPerHour.length; i++) {
+    var td = document.createElement("td");
+    td.textContent = this.salesPerHour[i];
+    tr.appendChild(td);
+  }
+  table.appendChild(tr);
+  var totalTd = document.createElement("td");
+  totalTd.textContent = this.totalCookies;
+  tr.appendChild(totalTd);
 };
+console.log(locationsArr);
+createTheTable();
+createTableHeader();
+var Seattle = new Location("Seattle", 23, 65, 6.3);
+var Tokyo = new Location("Tokyo", 3, 24, 1.2);
+var Dubai = new Location("Dubai", 11, 38, 3.7);
+var Paris = new Location("Paris", 20, 38, 2.3);
+var Lima = new Location("Lima", 2, 16, 4.6);
 
-Dubai.random(11, 38);
-Dubai.sales();
-Dubai.render();
-console.log(Dubai);
-console.table(Dubai);
+for (var i = 0; i < locationsArr.length; i++) {
+  locationsArr[i].random();
+  locationsArr[i].sales();
+  locationsArr[i].render();
+}
 
-// var Paris = {
-//   minCust: 20,
-//   maxCust: 38,
-//   avgSales: 2.3,
-var Paris = {
-  name: "Paris",
-  minCust: 20,
-  maxCust: 38,
-  avgSales: 2.3,
-  customers: [],
-  salesPerHour: [],
-  totalCookies: 0,
-
-  random: function (minCust, maxCust) {
-    for (var i = 0; i < timeArr.length; i++) {
-      var newNum = generateRandomNumber(minCust, maxCust);
-      this.customers.push(newNum);
-      // console.log(newNum);
-    }
-  },
-  sales: function () {
-    for (var i = 0; i < timeArr.length; i++) {
-      var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
-      this.salesPerHour.push(numOfCookies);
-
-      this.totalCookies = this.totalCookies + numOfCookies;
-    }
-  },
-
-  //DOM
-  render: function () {
-    var parentElement = document.getElementById("locations");
-
-    var article = document.createElement("article");
-    parentElement.appendChild(article);
-
-    var h2 = document.createElement("h2");
-    h2.innerHTML = this.name; //can replace .innerHTML with .textContent
-    article.appendChild(h2);
-
-    var p = document.createElement("p");
-    p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
-    article.appendChild(p);
-
-    var p2 = document.createElement("p");
-    p2.textContent = "total Sales= " + this.totalCookies;
-    article.appendChild(p2);
-
-    var ul = document.createElement("ul");
-    article.appendChild(ul);
-
-    for (var i = 0; i < timeArr.length; i++) {
-      var li = document.createElement("li");
-      ul.appendChild(li);
-      li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
-    }
-
-    console.log(parentElement);
-  },
-};
-
-Paris.random(20, 38);
-Paris.sales();
-Paris.render();
-console.log(Paris);
-console.table(Paris);
-// var Lima = {
-//   minCust: 2,
-//   maxCust: 16,
-//   avgSales: 4.6,
-
-var Lima = {
-  name: "Lima",
-  minCust: 2,
-  maxCust: 16,
-  avgSales: 4.6,
-  customers: [],
-  salesPerHour: [],
-  totalCookies: 0,
-
-  random: function (minCust, maxCust) {
-    for (var i = 0; i < timeArr.length; i++) {
-      var newNum = generateRandomNumber(minCust, maxCust);
-      this.customers.push(newNum);
-      // console.log(newNum);
-    }
-  },
-  sales: function () {
-    for (var i = 0; i < timeArr.length; i++) {
-      var numOfCookies = Math.floor(this.avgSales * this.customers[i]);
-      this.salesPerHour.push(numOfCookies);
-
-      this.totalCookies = this.totalCookies + numOfCookies;
-    }
-  },
-
-  //DOM
-  render: function () {
-    var parentElement = document.getElementById("locations");
-
-    var article = document.createElement("article");
-    parentElement.appendChild(article);
-
-    var h2 = document.createElement("h2");
-    h2.innerHTML = this.name; //can replace .innerHTML with .textContent
-    article.appendChild(h2);
-
-    var p = document.createElement("p");
-    p.textContent = "Number of customers " + this.customers; //this would be the total number of costumers for the day
-    article.appendChild(p);
-
-    var p2 = document.createElement("p");
-    p2.textContent = "total Sales= " + this.totalCookies;
-    article.appendChild(p2);
-
-    var ul = document.createElement("ul");
-    article.appendChild(ul);
-
-    for (var i = 0; i < timeArr.length; i++) {
-      var li = document.createElement("li");
-      ul.appendChild(li);
-      li.textContent = "At " + timeArr[i] + "  " + this.salesPerHour[i];
-    }
-
-    console.log(parentElement);
-  },
-};
-
-Lima.random(2, 16);
-Lima.sales();
-Lima.render();
-console.log(Lima);
-console.table(Lima);
+createTableFooter();
