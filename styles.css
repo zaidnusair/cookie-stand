@@ -1,11 +1,19 @@
 body {
   margin: 0;
+  background-image: url(imgs/family.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
 main {
   background-color: rgb(240, 237, 238);
   height: 700px;
   width: 100%;
+}
+
+.products section {
+  margin: 0;
+  background-color: rgb(240, 237, 238);
 }
 
 h3 {
@@ -24,6 +32,7 @@ main section {
 }
 
 .welcome div {
+  position: sticky;
   margin: 0;
 }
 
