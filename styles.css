@@ -1,17 +1,47 @@
 body {
-  background-color: chocolate;
+  margin: 0;
 }
-article {
-  color: black;
-  background-color: gray;
-}
-p {
-  background-color: whitesmoke;
+header {
+  position: relative;
+  background-color: rgb(119, 203, 185);
+  top: 0;
+  left: 0;
+  margin: 10%;
 }
 
-ul {
-  background-color: darkcyan;
+.nav-bar img {
+  margin: 0;
+  float: left;
+  background-color: rgb(134, 168, 115);
+  width: 140px;
+  height: 46.5px;
 }
+ul {
+  list-style-type: none;
+  margin: 0;
+  margin-top: 0%;
+  padding: 0;
+  overflow: hidden;
+  background-color: rgb(134, 168, 115);
+}
+
+li {
+  float: right;
+}
+
+li a {
+  display: block;
+  color: rgb(205, 211, 213);
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover  */
+li a:hover {
+  background-color: #111;
+}
+
 table,
 td,
 th {
