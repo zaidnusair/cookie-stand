@@ -128,6 +128,9 @@ Location.prototype.render = function () {
 createTheTable();
 createTableHeader();
 
+var addTr = document.getElementById("add");
+var trtr\tr\\;
+
 var Seattle = new Location("Seattle", 23, 65, 6.3);
 var Tokyo = new Location("Tokyo", 3, 24, 1.2);
 var Dubai = new Location("Dubai", 11, 38, 3.7);
