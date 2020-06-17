@@ -1,5 +1,4 @@
 "use strict";
-// //13 hrs per day [0-12]
 
 var R = 0; //random number generated
 var locationsArr = [];
@@ -125,15 +124,16 @@ Location.prototype.render = function () {
   totalTd.textContent = this.totalCookies;
   tr.appendChild(totalTd);
 };
-console.log(locationsArr);
+
 createTheTable();
 createTableHeader();
+
 var Seattle = new Location("Seattle", 23, 65, 6.3);
 var Tokyo = new Location("Tokyo", 3, 24, 1.2);
 var Dubai = new Location("Dubai", 11, 38, 3.7);
 var Paris = new Location("Paris", 20, 38, 2.3);
 var Lima = new Location("Lima", 2, 16, 4.6);
-
+console.log(locationsArr);
 for (var i = 0; i < locationsArr.length; i++) {
   locationsArr[i].random();
   locationsArr[i].sales();
