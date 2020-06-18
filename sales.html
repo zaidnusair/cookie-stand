@@ -35,27 +35,36 @@
     <main>
       <section id="locations"></section>
     </main>
-    <nav id="add">
+
+    <form action="submit" id="add">
       <fieldset>
-        <legend id="loc">Add location</legend>
+        <legend>Add location</legend>
         <label
           >Location<br />
-          <input type="text" name="Location" /></label
+          <input type="text" name="Location" id="loc" /></label
         ><br />
-        <label id="min"
+        <label
           >Minimum customers per hour:<br />
-          <input type="text" name="Minimum customers per hour" /></label
+          <input
+            type="number"
+            name="Minimum customers per hour"
+            id="min" /></label
         ><br />
-        <label id="max"
+        <label
           >Maximum customers per hour:<br />
-          <input type="text" name="Maximum customers per hour" /></label
+          <input
+            type="number"
+            name="Maximum customers per hour"
+            id="max" /></label
         ><br />
-        <label id="avg"
+        <label
           >Avarage sale per customer:<br />
-          <input type="text" name="Avarage sale per customer"
+          <input type="number" name="Avarage sale per customer" id="avg"
         /></label>
+        <input type="submit" id="submitForm" />
       </fieldset>
-    </nav>
+    </form>
+
     <!-- </div> -->
     <script src="app.js"></script>
   </body>

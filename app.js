@@ -128,8 +128,33 @@ Location.prototype.render = function () {
 createTheTable();
 createTableHeader();
 
-var addTr = document.getElementById("add");
-var trtr\tr\\;
+var cookiesForm = document.getElementById("cookiesForm");
+cookiesForm.addEventListener("submit", addNewLocation);
+
+function addNewLocation(event) {
+  event.preventDefault();
+
+  var locationName = event.target.standLocation.value;
+  var minCustomers = Number(event.target.minCustomersvare.value);
+  var maxCustomers = Number(event.target.maxCustomers.value);
+  var avgSales = Number(event.target.avgSales.value);
+
+  var newLocation = new Location(name, mincust, maxcust, avg);
+  newLocation.random();
+  newLocation.sales();
+  newLocation.render();
+}
+
+function renderTable() {
+  //header
+  makeHeadreRow();
+
+  for (var i = 0; i < locationsArr.length; i++) {
+    locationsArr[i];
+  }
+
+  //footer
+}
 
 var Seattle = new Location("Seattle", 23, 65, 6.3);
 var Tokyo = new Location("Tokyo", 3, 24, 1.2);
