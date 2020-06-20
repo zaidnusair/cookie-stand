@@ -128,33 +128,33 @@ Location.prototype.render = function () {
 createTheTable();
 createTableHeader();
 
-var cookiesForm = document.getElementById("cookiesForm");
-cookiesForm.addEventListener("submit", addNewLocation);
+// var cookiesForm = document.getElementById("cookiesForm");
+// cookiesForm.addEventListener("submit", addNewLocation);
 
-function addNewLocation(event) {
-  event.preventDefault();
+// function addNewLocation(event) {
+//   event.preventDefault();
 
-  var locationName = event.target.standLocation.value;
-  var minCustomers = Number(event.target.minCustomersvare.value);
-  var maxCustomers = Number(event.target.maxCustomers.value);
-  var avgSales = Number(event.target.avgSales.value);
+//   var locationName = event.target.standLocation.value;
+//   var minCustomers = Number(event.target.minCustomersvare.value);
+//   var maxCustomers = Number(event.target.maxCustomers.value);
+//   var avgSales = Number(event.target.avgSales.value);
 
-  var newLocation = new Location(name, mincust, maxcust, avg);
-  newLocation.random();
-  newLocation.sales();
-  newLocation.render();
-}
+//   var newLocation = new Location(name, mincust, maxcust, avg);
+//   newLocation.random();
+//   newLocation.sales();
+//   newLocation.render();
+// }
 
-function renderTable() {
-  //header
-  makeHeadreRow();
+// function renderTable() {
+//   //header
+//   makeHeadreRow();
 
-  for (var i = 0; i < locationsArr.length; i++) {
-    locationsArr[i];
-  }
+//   for (var i = 0; i < locationsArr.length; i++) {
+//     locationsArr[i];
+//   }
 
-  //footer
-}
+//   //footer
+// }
 
 var Seattle = new Location("Seattle", 23, 65, 6.3);
 var Tokyo = new Location("Tokyo", 3, 24, 1.2);
@@ -169,3 +169,39 @@ for (var i = 0; i < locationsArr.length; i++) {
 }
 
 createTableFooter();
+
+// makeHeadreRow();
+// for (var j = 0; j < locationsArr.length; j++) {
+//   locationsArr[j].render();
+// }
+// makeFooterRow();
+
+var cookiesForm = document.getElementById("cookiesForm");
+cookiesForm.addEventListener("submit", addNewLocation);
+
+function addNewLocation(event) {
+  event.preventDefault();
+
+  var name = event.target.standLocation.value;
+  var minCust = Number(event.target.minCust.value);
+  var maxCust = Number(event.target.maxCust.value);
+  var avgSales = Number(event.target.avgSales.value);
+
+  var newLocation = new Location(name, minCust, maxCust, avgSales);
+  newLocation.random();
+  newLocation.sales();
+  // newLocation.render();
+  renderTable();
+}
+
+function renderTable() {
+  //header
+  makeHeadreRow();
+
+  for (var i = 0; i < locationsArr.length; i++) {
+    locationsArr[i].render();
+  }
+
+  //footer
+  makeFooterRow();
+}

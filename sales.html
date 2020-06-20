@@ -38,7 +38,25 @@
 
     <form action="submit" id="cookiesForm">
       <fieldset>
-        <legend>Add location</legend>
+        <legend>Add New Stand</legend>
+        <label for="standLocation">Stand Location</label>
+        <input type="text" id="standLocation" />
+
+        <label for="minCust">Minimum Customers</label>
+        <input type="number" id="minCust" />
+
+        <label for="maxCust">Maximum Customers</label>
+        <input type="number" id="maxCust" />
+        <label for="avgCookies">Avarage Cookies Sold Per Customer</label>
+        <input type="numer" id="avgCookies" />
+
+        <input type="submit" id="submitForm" />
+      </fieldset>
+    </form>
+
+    <!-- <form action="submit" id="cookiesForm">
+      <fieldset>
+        <legend>Add New Stand</legend>
         <label
           >Location<br />
           <input type="text" name="Location" id="loc" /></label
@@ -63,7 +81,7 @@
         /></label>
         <input type="submit" id="submitForm" />
       </fieldset>
-    </form>
+    </form> -->
 
     <!-- </div> -->
     <script src="app.js"></script>
